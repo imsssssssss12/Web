@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Siswa, Guru, Piket Kelas, dan Galeri</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(to bottom, #aca1a1, #ff6666);
+           
+            height: 1200px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #a70000; /* Warna teks judul lebih gelap */
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background: #ffffff; /* Latar belakang kartu putih */
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Bayangan pada kontainer utama */
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        button {
+            flex: 1;
+            margin: 0 -4px;
+            padding: 10px 15px;
+            background-color: #eb2525; /* Warna latar belakang tombol hijau */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Bayangan pada tombol */
+        }
+        button:hover {
+            background-color: #ffffff; /* Warna saat hover lebih gelap */
+            color: black;
+        }
+        .card-container {
+            display: none; /* Awalnya disembunyikan */
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .card {
+            background: #eb2525; /* Warna latar belakang kartu hijau muda */
+            border-radius: 8px;
+            box-shadow: 8px 8px 5px 5px rgb(60, 62, 63);
+            margin: 10px;
+            padding: 20px;
+            flex: 1 1 calc(20% - 10px); /* Ukuran kartu */
+            box-sizing: border-box;
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Bayangan lebih dalam saat hover */
+        }
+        .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%; /* Menjadikan gambar berbentuk bulat */
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Bayangan pada gambar */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(105, 104, 104, 0.1); /* Bayangan pada tabel */
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #eb2525;
+        }
+        th {
+            background-color: #eb2525; /* Warna latar belakang tabel hijau */
+            color: white;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .gallery img {
+            width: calc(33% - 10px);
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Bayangan pada gambar galeri */
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Bayangan lebih dalam saat hover */
+        }
+        .atas{
+            display: flex;
+            justify-content: center;
+            background: transparent;
+        }
+    </style>
+    <script>
+        function toggleCards(cardType) {
+            const cardContainers = ['siswaCards', 'guruCards', 'piketCards', 'strukturCards', 'gallery', 'jadwalPelajaran', 'kegiatanKelas'];
+
+            // Sembunyikan semua kartu
+            cardContainers.forEach(id => {
+                const container = document.getElementById(id);
+                if (container) {
+                    container.style.display = id === cardType ? "flex" : "none";
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <div class="atas">
+    <img src="logo.png" alt="logo kiri" style="Width:200px">
+    <h1> DATA SISWA KELAS XI TKR 2</h1>
+    <img src="Logo TKR.png" alt="logo kanan" style="Width:300px">
+       
+        </div>
+
+        <div class="container">
+
+        <div class="button-container">
+            <button onclick="toggleCards('siswaCards')">Data Siswa</button>
+            <button onclick="toggleCards('guruCards')">Data Guru</button>
+            <button onclick="toggleCards('piketCards')">Piket Kelas</button>
+            <button onclick="toggleCards('strukturCards')">Struktur Kelas</button>
+            <button onclick="toggleCards('gallery')">Galeri Foto</button>
+            <button onclick="toggleCards('jadwalPelajaran')">Jadwal Pelajaran</button>
+            <button onclick="toggleCards('kegiatanKelas')">Kegiatan Kelas</button>
+        </div>
+
+        <div id="siswaCards" class="card-container">
+            <div class="card">
+                <img src="1. AGUS IMANUR ROHMAN.jpg" alt="">
+                <h3>AGUS IMANUR ROHMAN</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0097829238</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-08-09</p>
+                <p>Alamat: Sawir Dusun.Sumberarum Kec.Tambakboyo</p>
+
+            </div>
+            <div class="card">
+                <img src="2. HARSONO.jpg" alt="">
+                <h3>HARSONO</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0085787105</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2008-01-17</p>
+                <p>Alamat: ds.mliwang Dusun.Mliwang Kec.kerek</p>
+
+            </div>
+            <div class="card">
+                <img src="3. HENDRA DWI PRANATA.jpg" alt="">
+                <h3>HENDRA DWI PRANATA</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0076498098</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-03-22</p>
+                <p>Alamat: dsn.soco Desa/kel socorejo Kec.jenu</p>
+            </div>
+            <div class="card">
+                <img src="4. HENGKY AFRIANSAH.jpg" alt="">
+                <h3>HENGKY AFRIANSAH</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0077140111</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-04-19</p>
+                <p>Alamat: Kanoman Dusun.Kanoman Desa.Wolutengah Kec.Kerek</p>
+            </div>
+            <div class="card">
+                <img src="5. IKBAL MAULANA ALFARIZKI.jpg" alt="">
+                <h3>IKBAL MAULANA ALFARIZKI</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0074194411</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-06-17</p>
+                <p>Alamat: Desa.Hargoretno Dusun.Bawi Kulon Kec.kerek</p>
+            </div>
+            <div class="card">
+                <img src="6. JOKO SANTOSO.jpg" alt="">
+                <h3>JOKO SANTOSO</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0076591848</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-11-01</p>
+                <p>Alamat: Boncong  Desa.Boncong Kec.Bancar</p>
+            </div>
+            <div class="card">
+                <img src="Kelvin.jpeg" alt="">
+                <h3>KELVIN</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0077613150</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-01-11</p>
+                <p>Alamat: Cokrowati Cokrowati Kec.Tambakboyo</p>
+            </div>
+            <div class="card">
+                <img src="8. KEVIN CAHYONO.jpg" alt="">
+                <h3>KEVIN CAHYONO</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0082153750</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2008-06-20</p>
+                <p>Alamat: ds.sidomulyo Dusun.sriwing Kec.Bancar</p>
+            </div>
+            <div class="card">
+                <img src="9. KHOIRUL AMIN FAHRUDIN.jpg" alt="">
+                <h3>KHOIRUL AMIN FAHRUDIN</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0073245184</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-01-19</p>
+                <p>Alamat: Purworejo Dusun.Karangayar Kec.Jenu</p>
+            </div>
+            <div class="card">
+                <img src="10. KUNADI.jpg" alt="">
+                <h3>KUNADI</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0078796862</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-04-24</p>
+                <p>Alamat: Ds.Gemulung Dusun.Bangkok Kec.Kerek</p>
+            </div>
+            <div class="card">
+                <img src="11. LEO EGA PRASETYO.jpg" alt="">
+                <h3>LEO EGA PRASETYO</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0062961929</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2006-07-18</p>
+                <p>Alamat: Ds.Remen Kec.Bagor</p>
+            </div>
+            <div class="card">
+                <img src="12. M KHOIRUL ANAM.jpg" alt="">
+                <h3>M KHOIRUL ANAM</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0071701097</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-05-16</p>
+                <p>Alamat: Desa.Cokrowati Dusun.Muncup kec.Tambakboyo</p>
+            </div>
+            <div class="card">
+                <img src="13. M. GHOFUR.jpg" alt="">
+                <h3>M GHOFUR</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0071762384</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-08-11</p>
+                <p>Alamat: Dsn.Satryan Desa.Glondong Kec.Tambakboyo</p>
+            </div>
+            <div class="card">
+                <img src="14. M. HAIZUL FALAH.jpg" alt="">
+                <h3>M HAIZUL FALAH</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 007303246</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-05-14</p>
+                <p>Alamat: Dsn.Sumberarum Desa.Sawir Kec.Tambakboyo</p>
+            </div>
+            <div class="card">
+                <img src="15. M. KHOIRUR ROZIQIN.jpg" alt="">
+                <h3>M KHOIRUR  ROZIQIN</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0083127688</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2008-02-14</p>
+                <p>Alamat: Banjarjo Desa.Banjarjo Kec.Bancar</p>
+            </div>
+            <div class="card">
+                <img src="16. M. LUBAB WIDADILLAH.jpg" alt="">
+                <h3>M LUBAB WIDALILAH</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0076335307</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-01-28</p>
+                <p>Alamat: Jl.Satriyan Desa.Glondonggede Kec.tambakboyo </p>
+            </div>
+            <div class="card">
+                <img src="17. M. NUR KELVIN.jpg" alt="">
+                <h3>M NUR KELVIN</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0072247790/p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-08-08</p>
+                <p>Alamat: Dsn.Ketapang Desa Glondonggede Kec.Tambakboyo</p>
+            </div>
+            <div class="card">
+                <img src="18. M.FARISH NUZUL RAMADHAN.jpg" alt="">
+                <h3>M FARISH NUZUL RAMADHAN</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0088199249</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-10-07</p>
+                <p>Alamat: Bulujowo Dusun.Karangcandi Kec.bancar</p>
+            </div>
+            <div class="card">
+                <img src="19. MOCH. MACHMUD HASAN.jpg" alt="">
+                <h3>MOCH MACHMUD HASAN</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0073729584</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-12-07</p>
+                <p>Alamat:Galboro Cokrowati Kec.Tambakboyo</p>
+            </div>
+            <div class="card">
+                <img src="20. MOCHAMAD KAMIL MAYA.jpg" alt="">
+                <h3>MOCHAMAD KAMIL MAYA</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0083820490</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2008-05-28</p>
+                <p>Alamat: Ds.Bancar Dsn.Bancar Kec Bancar</p>
+            </div>
+            <div class="card">
+                <img src="21. MOCHAMMAD AINUR ZAKY.jpg" alt="">
+                <h3>MOCHAMMAD AINUR ZAKY</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 3081983231</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2008-02-27</p>
+                <p>Alamat: Dsn.Pulo kec.Tambakboyo</p>
+            </div>
+            <div class="card">
+                <img src="22. MOCHAMMAD IKHSANU ALFA.jpg" alt="">
+                <h3>MOCHAMAD IKHSANU ALFA</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0072149053</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-05-19</p>
+                <p>Alamat: Dsn.sumber rejo desa.sawir Kec.Tambakboyo</p>
+            </div>
+            <div class="card">
+                <img src="23. MOHAMAD FAHRUL ARDIANSYAH.jpg" alt="">
+                <h3>MOCHAMMAD FAHRUL ARDIANSYAH</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0075028555</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-03-02</p>
+                <p>Alamat: jl.Tanjang-Pulogede Dsn.Tanjang Desa.Pulogede Kec.Tambakboyo</p>
+            </div>
+            <div class="card">
+                <img src="24. MOHAMMAD FAISAL FAHMI.jpg" alt="">
+                <h3>MOHAMMAD FAISAL FAHMI</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0078702899</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-08-13</p>
+                <p>Alamat: Purworejo Tambakboyo Kec.Tambakboyo</p>
+            </div>
+            <div class="card">
+                <img src="25. MOHAMMAD NAILUL FALKHI.jpg" alt="">
+                <h3>MOHAMMAD NAILUL FALKHI</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 3072074893</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-10-08</p>
+                <p>Alamat: Dsn.tawang Rejo Tambakboyo kec.Tamboyo</p>
+            </div>
+            <div class="card">
+                <img src="26. MOHAMMAD TAUFIK DWI SUSANTO.jpg" alt="">
+                <h3>MOHAMMAD TAUFIK DWI SUSIANTO</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0072650285</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-09-28</p>
+                <p>Alamat: Dsn.Satriyan Ds.Glondong Kec.Tambakboyo</p>
+            </div>
+            <div class="card">
+                <img src="27. MOKHAMAD SAFAK.jpg" alt="">
+                <h3>MOKHAMAD SAFAK</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0079064979</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-11-07</p>
+                <p>Alamat: Dusun cangkring Desa.Sumberan Kec.Bancar</p>
+            </div>
+            <div class="card">
+                <img src="28. MUHAMAD NURUL AINUDDIN.jpg" alt="">
+                <h3>MUHAMAD NURUL AINUDDIN</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0088242966</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2008-01-09</p>
+                <p>Alamat: Dsn.sembugin desa.sembugin Kec.Bancar</p>
+            </div>
+            <div class="card">
+                <img src="29. MUHAMMAD ABDUL ROUF.jpg" alt="">
+                <h3>MUHAMMAD ABDUL ROUF</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0089636830</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2008-05-28</p>
+                <p>Alamat: Pulo Kec.Tambakboyo</p>
+            </div>
+            <div class="card">
+                <img src="30. MUHAMMAD AGUS NURROHMAN.jpg" alt="">
+                <h3>MUHAMMAD AGUS NURROHMAN</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0078719218</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-08-23</p>
+                <p>Alamat: Dsn.Socorejo Desa.sawir Kec.Tambakboyo</p>
+            </div>
+            <div class="card">
+                <img src="31. MUHAMMAD AMARUDDIN JAUHAR.jpg" alt="">
+                <h3>MUHAMMAD AMARUDDIN JAUHAR</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0071023405</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-10-07</p>
+                <p>Alamat: Cokrowati kec.Tambakboyo</p>
+            </div>
+            <div class="card">
+                <img src="32. MUHAMMAD DA'IMUL ILMI.jpg" alt="">
+                <h3>MUHAMMAD DAIMUL ILMI</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0081185416</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2008-05-30</p>
+                <p>Alamat: Temaji Kec.Jenu</p>
+            </div>
+            <div class="card">
+                <img src="33. MUHAMMAD ULUM.jpg" alt="">
+                <h3>MUHAMMAD ULUM</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0074589251</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2007-09-06</p>
+                <p>Alamat: Bancar Dsn.Ngembak kec.bancar</p>
+            </div>
+            <div class="card">
+                <img src="34. NAUFAL RIJJALUL MUSYAFA'.jpg" alt="">
+                <h3>NAUFAL RIJJALUL MUSYAFA</h3>
+                <p>Kelas: 11 TKR 2</p>
+                <p>jenis kelamin: Laki laki</p>
+                <p>NISN: 0088444522</p>
+                <p>Tempat Lahir: Tuban</p>
+                <p>Tanggal lahir: 2008-07-03</p>
+                <p>Alamat: Dsn.Belik Ds.Belikanget Kec.Tambakboyo</p>
+            </div>
+          </div>
+
+        <div id="guruCards" class="card-container">
+            <div class="card">
+                <img src="pak huda.jpeg" alt="">
+                <h3>PAK HUDA</h3>
+                <p>Jabatan: Guru Produktif TKR</p>
+            </div>
+            <div class="card">
+                <img src="" alt="">
+                <h3>PAK IPUNG</h3>
+                <p>Jabatan: Guru PKK</p>
+            </div>
+            <div class="card">
+                <img src="pak huda.jpeg" alt="">
+                <h3>Pak MUKHAMMAD SYAFIULLAH</h3>
+                <p>Jabatan: Guru Produktif TKR</p>
+            </div>
+            <div class="card">
+                <img src="" alt="">
+                <h3>PAK AHMAD MUHDOR </h3>
+                <p>Jabatan: Guru Produktif TKR</p>
+            </div>
+            <div class="card">
+                <img src="bu yuli.jpeg" alt="">
+                <h3>BU YULI</h3>
+                <p>Jabatan: Guru Sejarah</p>
+            </div>
+            <div class="card">
+                <img src="pak agus.jpeg" alt="">
+                <h3>PAK AGUS</h3>
+                <p>Jabatan: Guru Penjaskes</p>
+            </div>
+            <div class="card">
+                <img src="Bu Rosmatus sholihah.jpeg" alt="">
+                <h3>BU ROSMATUS SHOLIHAH</h3>
+                <p>Jabatan: Guru PAI</p>
+            </div>
+            <div class="card">
+                <img src="pak mukhti.jpeg" alt="">
+                <h3>PAK MUKTI</h3>
+                <p>Jabatan: Guru PPKN</p>
+            </div>
+            <div class="card">
+                <img src="BU yulia.jpeg" alt="">
+                <h3>Bu Yulia</h3>
+                <p>Jabatan: Guru BK</p>
+            </div>
+            <div class="card">
+                <img src="Bu nurul.jpeg" alt="">
+                <h3>Bu Nurul Hamidya A</h3>
+                <p>Jabatan: Guru Bahasa Indonesia</p>
+            </div>
+            <div class="card">
+                <img src="Bu Eni.jpeg" alt="">
+                <h3>BU ENI MAHZUMAH</h3>
+                <p>Jabatan: Guru Bahasa Inggris</p>
+            </div>
+            <div class="card">
+                <img src="Bu tika.jpeg" alt="">
+                <h3>BU TIKA</h3>
+                <p>Jabatan: Guru Bahasa Jawa</p>
+            </div>
+            <div class="card">
+                <img src="pak didik.jpeg" alt="">
+                <h3>PAK DIDIK</h3>
+                <p>Jabatan: Guru Matematika</p>
+            </div>
+        </div>
+
+        <div id="piketCards" class="card-container">
+            <div class="card">
+                <h3>Senin</h3>
+                <p> AGUS IMANUR ROHMAN</p>
+                <p> HARSONO</p>
+                <p> HENDRA DWI PRANATA</p>
+                <p> HENGKI AFRIANSYAH</p>
+                <p> IKBAL MAULANA ALFARIZKI</p>
+                <p> JOKO SANTOSO</p>
+                <p> KELVIN</p>
+            </div>
+            <div class="card">
+                <h3>Selasa</h3>
+                <p> KEVIN CAHYONO</p>
+                <p> KHOIRUL AMIN FAHRUDIN</p>
+                <p> KUNADI</p>
+                <p> LEO EGA PRASETYO</p>
+                <p> M.KHOIRUL ANAM</p>
+                <p> M.GHOFUR</p>
+                <p> M.HAIZUL FALAH</p>
+            </div>
+            <div class="card">
+                <h3>Rabu</h3>
+                <p> M.KHOIRUR ROZIQIN</p>
+                <p> M.LUBAB WIDALILLAH</p>
+                <p> M.NUR KELVIN</p>
+                <p> M.FARISH NUZUL RAMADHAN</p>
+                <p> MOCH.MACHMUD HASAN</p>
+                <p> MOCHAMAD KAMIL MAYA</p>
+                <p> MOCHAMMAD AINUR ZAKY</p>
+            </div>
+            <div class="card">
+                <h3>Kamis</h3>
+                <p> MOCHAMMAD IKHSANU ALFA</p>
+                <p> MOHAMMAD FAHRUL ARDIANSYAH</p>
+                <p> MOHAMMAD FAISAL FAHMI</p>
+                <p> MOHAMMAD NAILUL FALKHI</p>
+                <p> MOHAMMAD TAUFIK DWI SUSANTO</p>
+                <p> MOKHAMAD SAFAK</p>
+                <p> MUHAMAD NURUL AINUDDIN</p>
+           </div>
+           <div class="card">
+                <h3>Jumat</h3>
+                <p> MUHAMMAD ABDUL ROUF</p>
+                <p> MUHAMMAD AGUS NURROHMAN</p>
+                <p> MUHAMMAD AMARUDDIN JAUHAR</p>
+                <p> MUHAMMAD DA'IMUL ILMI</p>
+                <p> MUHAMMAD ULUM</p>
+                <p> NAUFAL RIJJALUL MUSYAFA'</p>
+           </div>
+        </div>
+
+        <div id="strukturCards" class="card-container">
+            <div class="card">
+                <img src="12. M KHOIRUL ANAM.jpg" alt="">
+                <h3>Ketua Kelas</h3>
+                <p>Nama: M.KHOIRUL ANAM</p>
+            </div>
+                <div class="card">
+                <img src="34. NAUFAL RIJJALUL MUSYAFA'.jpg" alt="">
+                <h3>Sekertaris</h3>
+                <p>Nama: NAUFAL RIJJALUL MUSYAFFA</p>
+            </div>
+            <div class="card">
+                <img src="2. HARSONO.jpg" alt="">
+                <h3>BENDAHARA</h3>
+                <p>Nama: HARSONO</p>
+            </div>
+            <div class="card">
+                <img src="pak ari.jpeg" alt="">
+                <h3>Kepala Jurusan</h3>
+                <p>Nama: PAK ARI HIDAYAT</p>
+            </div>
+            <div class="card">
+                <img src="agus-siswanto.png" alt="">
+                <h3>Kepala Sekolah</h3>
+                <p>Nama: PAK AGUS SISWANTO</p>
+            </div>
+         </div>
+
+        <div id="gallery" class="gallery">
+            <img src="foto bareng.jpeg" alt="">
+            <img src="fotbar.jpeg" alt="">
+            <img src="ffoto.jpeg" alt="">
+        </div>
+
+        <div id="jadwalPelajaran" class="card-container">
+            <table>
+                <tr>
+                    <th>Hari</th>
+                    <th>Pelajaran</th>
+                </tr>
+                <tr>
+                    <td rowspan="4">Senin</td>
+                    <td>B7 TKR</td>
+                </tr>
+                <tr>
+                    <td>B2</td>
+                </tr>
+                <tr>
+                    <td>B8A TKR</td>
+                </tr>
+                <tr>
+                    <td>B6 TKR</td>
+                </tr>
+        
+                <tr>
+                    <td rowspan="5">Selasa</td>
+                    <td>B. JAWA</td>
+                </tr>
+                <tr>
+                    <td>SEJARAH</td>
+                </tr>
+                <tr>
+                    <td>MATEMATIKA</td>
+                </tr>
+                 <tr>
+                    <td>B. INGGRIS</td>
+                </tr>
+                 <tr>
+                    <td>PPKN</td>
+                </tr>
+        
+                <tr>
+                    <td rowspan="1">Rabu</td>
+                    <td>B6 TKR PRODUKTIF</td>
+                </tr>
+                <tr>
+                    <td rowspan="4">Kamis</td>
+                    <td>PJOK</td>
+                </tr>
+                <tr>
+                 <td>B. INDONESIA</td>
+                </tr>
+                <tr>
+                 <td>B8A TKR</td>
+                </tr>
+                <tr>
+                 <td>PAI</td>
+                </tr>
+        
+                <tr>
+                    <td rowspan="1">Jumat</td>
+                    <td>B6 TKR</td>
+                </tr>
+        
+            </table>
+         </div>
+        
+
+        <div id="kegiatanKelas" class="card-container">
+            <h3>Kegiatan Kelas</h3>
+            <ul class="activity-list">
+            <li>class meet</li>
+            <li>Jumat Religius</li>
+            <li>Kunjungan Industri</li>
+            </ul>
+            
+        </div>
+    </div>
+</body>
+</html>
